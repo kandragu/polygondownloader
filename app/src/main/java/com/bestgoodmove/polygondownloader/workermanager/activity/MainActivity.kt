@@ -8,6 +8,7 @@ import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.bestgoodmove.polygondownloader.R
 import com.bestgoodmove.polygondownloader.workermanager.DownloadWorker
+import com.bestgoodmove.polygondownloader.workermanager.parser.RssParser
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
@@ -19,7 +20,19 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
         scheduleWork()
+       // getRss()
+    }
+
+    fun getRss() {
+
+        var rssParser = RssParser()
+//                  var rssChannel = rssParser.parse("https://www.techrepublic.com/rssfeeds/downloads/")
+        var rssChannel = rssParser.parse("https://www.polygon.com/rss/index.xml")
+
+
     }
 
     fun scheduleWork(){
