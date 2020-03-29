@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             .build()
 
         val workmanager = WorkManager.getInstance(application)
-        val request = PeriodicWorkRequestBuilder<DownloadWorker>(5, TimeUnit.MINUTES)
+        val request = PeriodicWorkRequestBuilder<DownloadWorker>(1, TimeUnit.HOURS)
             .setConstraints(constrain)
             .addTag(tag)
             .build()

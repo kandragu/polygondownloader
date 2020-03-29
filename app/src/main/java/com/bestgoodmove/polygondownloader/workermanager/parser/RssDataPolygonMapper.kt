@@ -1,6 +1,9 @@
 package com.bestgoodmove.polygondownloader.workermanager.parser
 
 
+import android.content.ContentValues
+import android.util.Log
+import com.bestgoodmove.polygondownloader.workermanager.provider.Constants
 import org.w3c.dom.Element
 import org.w3c.dom.Node
 import java.io.BufferedInputStream
@@ -16,7 +19,7 @@ object RssDataPolygonMapper {
     private val DESCRIPTION = "description"
     private val PUB_DATE = "published"
     private val UPDATED_DATE = "published"
-    private val CONTENT = "published"
+    private val CONTENT = "content"
 
 
     private val TTL = "ttl"
@@ -27,20 +30,22 @@ object RssDataPolygonMapper {
     private val TYPE = "type"
 
     private var replacer: Replacer? = null
-    fun map(inputStream: BufferedInputStream) : Unit? {
+    fun map(inputStream: BufferedInputStream) : ArrayList<ContentValues>?? {
         return map(inputStream, null, {})
     }
 
-    fun map(inputStream: BufferedInputStream, replacer: Replacer) : Unit? {
+    fun map(inputStream: BufferedInputStream, replacer: Replacer) : ArrayList<ContentValues>?? {
         return map(inputStream, replacer, {})
     }
 
-    fun map(inputStream: BufferedInputStream, onFinish: () -> Unit) : Unit? {
+    fun map(inputStream: BufferedInputStream, onFinish: () -> Unit) : ArrayList<ContentValues>?? {
         return map(inputStream, null, onFinish)
     }
 
-    fun map(inputStream: BufferedInputStream, replacer: Replacer?, onFinish: () -> Unit) : Unit? {
+    fun map(inputStream: BufferedInputStream, replacer: Replacer?, onFinish: () -> Unit) : ArrayList<ContentValues>? {
         this.replacer = replacer
+        var arrContent = ArrayList<ContentValues>();
+
         try {
             var builderFactory = DocumentBuilderFactory.newInstance()
             var documentBuilder = builderFactory.newDocumentBuilder()
@@ -62,8 +67,17 @@ object RssDataPolygonMapper {
                 var content = getContent(item)
 
 
+                val tuple = ContentValues()
+                tuple.put(Constants.TITLE, itemTitle)
+                tuple.put(Constants.PUB_DATE, itemPubDate)
+                tuple.put(Constants.UPDATED_DATE, entryUpdate)
+                tuple.put(Constants.CONTENT,content)
+
+                Log.d("tag", content)
+                arrContent.add(tuple);
+
             }
-            return null
+            return arrContent;
 
         } catch (e: Exception) {
             e.printStackTrace()

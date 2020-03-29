@@ -1,5 +1,6 @@
 package com.bestgoodmove.polygondownloader.workermanager.parser
 
+import android.content.ContentValues
 import com.theeasiestway.net.NetworkService
 
 
@@ -7,12 +8,12 @@ class RssParser {
 
     private var networkService: NetworkService = NetworkService()
 
-    fun parse(url: String) : Unit? {
+    fun parse(url: String) : ArrayList<ContentValues>? {
       //  return RssDataMapper.map(networkService.request(url), {networkService.disconnect()})
         return RssDataPolygonMapper.map(networkService.request(url), {networkService.disconnect()})
     }
 
-    fun parse(url: String, regexp: String, replacement: String) : Unit? {
+    fun parse(url: String, regexp: String, replacement: String) : ArrayList<ContentValues>? {
        // return RssDataMapper.map(networkService.request(url), RssDataMapper.Replacer(regexp, replacement), {networkService.disconnect()})
         return RssDataPolygonMapper.map(networkService.request(url), RssDataPolygonMapper.Replacer(regexp, replacement), {networkService.disconnect()})
     }
