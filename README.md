@@ -12,6 +12,7 @@ Application B
 ## Tech Stack
 
 - Android App build using **Kotlin**
+- Android WorkerManager for background task
 
 ## SQLLite table data structure
 
@@ -19,4 +20,4 @@ Application B
 
 ## Design of the software
 
-![alt text](./diagram/PolygonRssReader.png "Polygon Rss Reader diagram")
+![alt text](./diagram/PolygonRSSReader.png "Polygon Rss Reader diagram")
