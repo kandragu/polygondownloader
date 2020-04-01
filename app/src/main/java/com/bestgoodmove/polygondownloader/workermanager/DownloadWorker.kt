@@ -20,7 +20,6 @@ class DownloadWorker(ctx: Context, params: WorkerParameters): Worker(ctx,params)
     fun getRss() {
 
         var rssParser = RssParser()
-//                  var rssChannel = rssParser.parse("https://www.techrepublic.com/rssfeeds/downloads/")
         var lstContent = rssParser.parse("https://www.polygon.com/rss/index.xml")
         if (lstContent != null) {
             // Cleanup work

@@ -23,17 +23,8 @@ class MainActivity : AppCompatActivity() {
 
 
         scheduleWork()
-       // getRss()
     }
 
-    fun getRss() {
-
-        var rssParser = RssParser()
-//                  var rssChannel = rssParser.parse("https://www.techrepublic.com/rssfeeds/downloads/")
-        var rssChannel = rssParser.parse("https://www.polygon.com/rss/index.xml")
-
-
-    }
 
     fun scheduleWork(){
         val constrain = Constraints.Builder()
